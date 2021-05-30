@@ -2,6 +2,7 @@ import axios from "axios";
 import { data } from "jquery";
 import React, { useState} from "react";
 
+
 const Generate = () =>{
     const [amount, setAmount] = useState(0)
 

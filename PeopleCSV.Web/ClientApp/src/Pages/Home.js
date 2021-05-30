@@ -16,7 +16,8 @@ const Home = () =>{
   }, []);
 
   const onDelete =async () =>{
-      await axios.post("api/people/delete")
+     const {data} =await axios.post("api/people/delete")
+     setPeople(data);
   }
 
 return(
@@ -25,23 +26,12 @@ return(
         <div className="row col-md-13" style={{alignContent:"center" }}>
             <button className="btn btn-danger btn-block" onClick={onDelete}>Delete All</button>
         </div>
-      <table className="table table-hover table-striped table-bordered mt-3">
-        <thead>
-          <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        <tbody>
+     
           {!!people.length &&
             people.map((person) => (
               <PersonRow person={person} key={person.id} />
             ))}
-        </tbody>
-      </table>
+      
     </div>
   </div>
 )
