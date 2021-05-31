@@ -22,9 +22,10 @@ const Home = () =>{
 
 return(
     <div>
-    
-        <div className="row col-md-13" style={{alignContent:"center" }}>
-            <button className="btn btn-danger btn-block" onClick={onDelete}>Delete All</button>
+    <div className="row col-md-11 ">
+    <div className="col-md-3 offset-md-3">
+  </div>
+            <button className="btn btn-danger btn-lg" onClick={onDelete}>Delete All</button>
         </div>
      <div className="row">
           {!!people.length &&

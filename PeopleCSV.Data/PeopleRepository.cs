@@ -19,23 +19,28 @@ namespace PeopleCSV.Data
         public string GeneratePeopleList(int x)
         {
             var ppl = new List<Person>();
+           
             for (int y = 1; y <= x; y++)
             {
-                var person = new Person
+                var person = new Person();
+                if (y % 2 != 0)
                 {
-                    Id = 0,
-                    FirstName = Faker.NameFaker.FirstName(),
-                    LastName = Faker.NameFaker.LastName(),
-                    Age = Faker.NumberFaker.Number(1, 120),
-                    Address = $"{Faker.LocationFaker.StreetNumber()}  {Faker.LocationFaker.StreetName()} {Faker.LocationFaker.City()}",
-                    Email = Faker.InternetFaker.Email()
-                };
+                    person.FirstName = Faker.NameFaker.MaleFirstName();
+                    person.Gender = Gender.Male;
+                }
+                else
+                {
+                    person.FirstName = Faker.NameFaker.FemaleFirstName();
+                    person.Gender = Gender.Female;
+                }
 
+                person.Id = 0;
+                person.LastName = Faker.NameFaker.LastName();
+                person.Age = Faker.NumberFaker.Number(1, 120);
+                person.Address = $"{Faker.LocationFaker.StreetNumber()}  {Faker.LocationFaker.StreetName()} {Faker.LocationFaker.Street()} {Faker.LocationFaker.City()} {Faker.LocationFaker.ZipCode()}";
+                person.Email = Faker.InternetFaker.Email();
                 ppl.Add(person);
-            }
-
-            var ppl2 = Builder<Person>.CreateListOfSize(x)
-            .Build();
+                    }
             return GetCsv(ppl);
         }
 
@@ -50,7 +55,7 @@ namespace PeopleCSV.Data
         public List<Person> GetPeople()
         {
             using var ctx = new PeopleDbContext(_connectionString);
-            return ctx.People.ToList();
+            return ctx.People.OrderBy(p => p.FirstName).ToList();
         }
 
 
