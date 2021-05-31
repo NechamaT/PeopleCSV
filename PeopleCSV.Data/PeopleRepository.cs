@@ -37,7 +37,7 @@ namespace PeopleCSV.Data
                 person.Id = 0;
                 person.LastName = Faker.NameFaker.LastName();
                 person.Age = Faker.NumberFaker.Number(1, 120);
-                person.Address = $"{Faker.LocationFaker.StreetNumber()}  {Faker.LocationFaker.StreetName()} {Faker.LocationFaker.Street()} {Faker.LocationFaker.City()} {Faker.LocationFaker.ZipCode()}";
+                person.Address = $"{Faker.LocationFaker.StreetNumber()}  {Faker.LocationFaker.StreetName()} {Faker.LocationFaker.City()}, {Faker.LocationFaker.ZipCode()}";
                 person.Email = Faker.InternetFaker.Email();
                 ppl.Add(person);
                     }
